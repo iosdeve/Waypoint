@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B0FE200F1851C40800A920B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE200E1851C40800A920B3 /* UIKit.framework */; };
+		B0FE20111851C40800A920B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE20101851C40800A920B3 /* Foundation.framework */; };
+		B0FE20131851C40800A920B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE20121851C40800A920B3 /* CoreGraphics.framework */; };
+		B0FE20191851C40800A920B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B0FE20171851C40800A920B3 /* InfoPlist.strings */; };
+		B0FE201B1851C40800A920B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FE201A1851C40800A920B3 /* main.m */; };
+		B0FE201F1851C40800A920B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FE201E1851C40800A920B3 /* AppDelegate.m */; };
+		B0FE20211851C40800A920B3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FE20201851C40800A920B3 /* Default.png */; };
+		B0FE20231851C40800A920B3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FE20221851C40800A920B3 /* Default@2x.png */; };
+		B0FE20251851C40800A920B3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B0FE20241851C40800A920B3 /* Default-568h@2x.png */; };
+		B0FE20281851C40800A920B3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FE20271851C40800A920B3 /* ViewController.m */; };
+		B0FE202B1851C40800A920B3 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0FE20291851C40800A920B3 /* ViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B0FE200B1851C40800A920B3 /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0FE200E1851C40800A920B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B0FE20101851C40800A920B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B0FE20121851C40800A920B3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B0FE20161851C40800A920B3 /* Waypoint-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Waypoint-Info.plist"; sourceTree = "<group>"; };
+		B0FE20181851C40800A920B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B0FE201A1851C40800A920B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B0FE201C1851C40800A920B3 /* Waypoint-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Waypoint-Prefix.pch"; sourceTree = "<group>"; };
+		B0FE201D1851C40800A920B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B0FE201E1851C40800A920B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B0FE20201851C40800A920B3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		B0FE20221851C40800A920B3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		B0FE20241851C40800A920B3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B0FE20261851C40800A920B3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B0FE20271851C40800A920B3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B0FE202A1851C40800A920B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B0FE20081851C40800A920B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FE200F1851C40800A920B3 /* UIKit.framework in Frameworks */,
+				B0FE20111851C40800A920B3 /* Foundation.framework in Frameworks */,
+				B0FE20131851C40800A920B3 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B0FE20021851C40800A920B3 = {
+			isa = PBXGroup;
+			children = (
+				B0FE20141851C40800A920B3 /* Waypoint */,
+				B0FE200D1851C40800A920B3 /* Frameworks */,
+				B0FE200C1851C40800A920B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B0FE200C1851C40800A920B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B0FE200B1851C40800A920B3 /* Waypoint.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B0FE200D1851C40800A920B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B0FE200E1851C40800A920B3 /* UIKit.framework */,
+				B0FE20101851C40800A920B3 /* Foundation.framework */,
+				B0FE20121851C40800A920B3 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B0FE20141851C40800A920B3 /* Waypoint */ = {
+			isa = PBXGroup;
+			children = (
+				B0FE20351851CC5B00A920B3 /* Controller */,
+				B0FE20361851CC5B00A920B3 /* Resource */,
+				B0FE20381851CC5B00A920B3 /* View */,
+				B0FE20391851CC5B00A920B3 /* Model */,
+				B0FE203A1851CC5B00A920B3 /* Dao */,
+				B0FE201D1851C40800A920B3 /* AppDelegate.h */,
+				B0FE201E1851C40800A920B3 /* AppDelegate.m */,
+				B0FE20261851C40800A920B3 /* ViewController.h */,
+				B0FE20271851C40800A920B3 /* ViewController.m */,
+				B0FE20291851C40800A920B3 /* ViewController.xib */,
+				B0FE20151851C40800A920B3 /* Supporting Files */,
+			);
+			path = Waypoint;
+			sourceTree = "<group>";
+		};
+		B0FE20151851C40800A920B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B0FE20161851C40800A920B3 /* Waypoint-Info.plist */,
+				B0FE20171851C40800A920B3 /* InfoPlist.strings */,
+				B0FE201A1851C40800A920B3 /* main.m */,
+				B0FE201C1851C40800A920B3 /* Waypoint-Prefix.pch */,
+				B0FE20201851C40800A920B3 /* Default.png */,
+				B0FE20221851C40800A920B3 /* Default@2x.png */,
+				B0FE20241851C40800A920B3 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B0FE20351851CC5B00A920B3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B0FE20361851CC5B00A920B3 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B0FE20371851CC5B00A920B3 /* image */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B0FE20371851CC5B00A920B3 /* image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		B0FE20381851CC5B00A920B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B0FE20391851CC5B00A920B3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B0FE203A1851CC5B00A920B3 /* Dao */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dao;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B0FE200A1851C40800A920B3 /* Waypoint */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0FE202E1851C40800A920B3 /* Build configuration list for PBXNativeTarget "Waypoint" */;
+			buildPhases = (
+				B0FE20071851C40800A920B3 /* Sources */,
+				B0FE20081851C40800A920B3 /* Frameworks */,
+				B0FE20091851C40800A920B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Waypoint;
+			productName = Waypoint;
+			productReference = B0FE200B1851C40800A920B3 /* Waypoint.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B0FE20031851C40800A920B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "陈欣";
+			};
+			buildConfigurationList = B0FE20061851C40800A920B3 /* Build configuration list for PBXProject "Waypoint" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B0FE20021851C40800A920B3;
+			productRefGroup = B0FE200C1851C40800A920B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B0FE200A1851C40800A920B3 /* Waypoint */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B0FE20091851C40800A920B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FE20191851C40800A920B3 /* InfoPlist.strings in Resources */,
+				B0FE20211851C40800A920B3 /* Default.png in Resources */,
+				B0FE20231851C40800A920B3 /* Default@2x.png in Resources */,
+				B0FE20251851C40800A920B3 /* Default-568h@2x.png in Resources */,
+				B0FE202B1851C40800A920B3 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B0FE20071851C40800A920B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0FE201B1851C40800A920B3 /* main.m in Sources */,
+				B0FE201F1851C40800A920B3 /* AppDelegate.m in Sources */,
+				B0FE20281851C40800A920B3 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B0FE20171851C40800A920B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0FE20181851C40800A920B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B0FE20291851C40800A920B3 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B0FE202A1851C40800A920B3 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B0FE202C1851C40800A920B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B0FE202D1851C40800A920B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B0FE202F1851C40800A920B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Waypoint/Waypoint-Prefix.pch";
+				INFOPLIST_FILE = "Waypoint/Waypoint-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B0FE20301851C40800A920B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Waypoint/Waypoint-Prefix.pch";
+				INFOPLIST_FILE = "Waypoint/Waypoint-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B0FE20061851C40800A920B3 /* Build configuration list for PBXProject "Waypoint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0FE202C1851C40800A920B3 /* Debug */,
+				B0FE202D1851C40800A920B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0FE202E1851C40800A920B3 /* Build configuration list for PBXNativeTarget "Waypoint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0FE202F1851C40800A920B3 /* Debug */,
+				B0FE20301851C40800A920B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B0FE20031851C40800A920B3 /* Project object */;
+}
