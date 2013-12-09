@@ -16,6 +16,9 @@
 		B0790FDB18557BF5005827B9 /* libbaidumapapi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B0790FD718557BF5005827B9 /* libbaidumapapi.a */; };
 		B0790FDC18557BF5005827B9 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B0790FD818557BF5005827B9 /* mapapi.bundle */; };
 		B0790FDD18557BF5005827B9 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = B0790FD918557BF5005827B9 /* readme.txt */; };
+		B0EE6D111855CA4D0056BDF2 /* NibBasedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6D101855CA4D0056BDF2 /* NibBasedTableViewCell.m */; };
+		B0EE6D151855CAE90056BDF2 /* MoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6D131855CAE90056BDF2 /* MoveViewController.m */; };
+		B0EE6D161855CAE90056BDF2 /* MoveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */; };
 		B0FE200F1851C40800A920B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE200E1851C40800A920B3 /* UIKit.framework */; };
 		B0FE20111851C40800A920B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE20101851C40800A920B3 /* Foundation.framework */; };
 		B0FE20131851C40800A920B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE20121851C40800A920B3 /* CoreGraphics.framework */; };
@@ -159,6 +162,11 @@
 		B0790FD718557BF5005827B9 /* libbaidumapapi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaidumapapi.a; sourceTree = "<group>"; };
 		B0790FD818557BF5005827B9 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		B0790FD918557BF5005827B9 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		B0EE6D0F1855CA4D0056BDF2 /* NibBasedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibBasedTableViewCell.h; sourceTree = "<group>"; };
+		B0EE6D101855CA4D0056BDF2 /* NibBasedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibBasedTableViewCell.m; sourceTree = "<group>"; };
+		B0EE6D121855CAE90056BDF2 /* MoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveViewController.h; sourceTree = "<group>"; };
+		B0EE6D131855CAE90056BDF2 /* MoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveViewController.m; sourceTree = "<group>"; };
+		B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoveViewController.xib; sourceTree = "<group>"; };
 		B0FE200B1851C40800A920B3 /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FE200E1851C40800A920B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0FE20101851C40800A920B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -377,6 +385,22 @@
 			path = inc;
 			sourceTree = "<group>";
 		};
+		B0EE6D0E1855CA4D0056BDF2 /* NibBaseCell */ = {
+			isa = PBXGroup;
+			children = (
+				B0EE6D0F1855CA4D0056BDF2 /* NibBasedTableViewCell.h */,
+				B0EE6D101855CA4D0056BDF2 /* NibBasedTableViewCell.m */,
+			);
+			path = NibBaseCell;
+			sourceTree = "<group>";
+		};
+		B0EE6D171855CBBA0056BDF2 /* SpeedAndDistanceCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SpeedAndDistanceCell;
+			sourceTree = "<group>";
+		};
 		B0FE20021851C40800A920B3 = {
 			isa = PBXGroup;
 			children = (
@@ -445,6 +469,9 @@
 		B0FE20351851CC5B00A920B3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B0EE6D121855CAE90056BDF2 /* MoveViewController.h */,
+				B0EE6D131855CAE90056BDF2 /* MoveViewController.m */,
+				B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -467,6 +494,8 @@
 		B0FE20381851CC5B00A920B3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B0EE6D171855CBBA0056BDF2 /* SpeedAndDistanceCell */,
+				B0EE6D0E1855CA4D0056BDF2 /* NibBaseCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -543,6 +572,7 @@
 				B0FE202B1851C40800A920B3 /* ViewController.xib in Resources */,
 				B0790FDC18557BF5005827B9 /* mapapi.bundle in Resources */,
 				B0790FDD18557BF5005827B9 /* readme.txt in Resources */,
+				B0EE6D161855CAE90056BDF2 /* MoveViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +586,8 @@
 				B0FE201B1851C40800A920B3 /* main.m in Sources */,
 				B0FE201F1851C40800A920B3 /* AppDelegate.mm in Sources */,
 				B0FE20281851C40800A920B3 /* ViewController.m in Sources */,
+				B0EE6D111855CA4D0056BDF2 /* NibBasedTableViewCell.m in Sources */,
+				B0EE6D151855CAE90056BDF2 /* MoveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
