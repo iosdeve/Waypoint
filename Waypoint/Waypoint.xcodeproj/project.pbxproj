@@ -19,6 +19,9 @@
 		B0EE6D111855CA4D0056BDF2 /* NibBasedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6D101855CA4D0056BDF2 /* NibBasedTableViewCell.m */; };
 		B0EE6D151855CAE90056BDF2 /* MoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6D131855CAE90056BDF2 /* MoveViewController.m */; };
 		B0EE6D161855CAE90056BDF2 /* MoveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */; };
+		B0F6DC1D18560954001EDB87 /* SpeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F6DC1C18560954001EDB87 /* SpeedCell.xib */; };
+		B0F6DC1F18560A26001EDB87 /* TakeTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F6DC1E18560A26001EDB87 /* TakeTimeCell.xib */; };
+		B0F6DC2118560A54001EDB87 /* FastSpeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F6DC2018560A54001EDB87 /* FastSpeedCell.xib */; };
 		B0FE200F1851C40800A920B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE200E1851C40800A920B3 /* UIKit.framework */; };
 		B0FE20111851C40800A920B3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE20101851C40800A920B3 /* Foundation.framework */; };
 		B0FE20131851C40800A920B3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FE20121851C40800A920B3 /* CoreGraphics.framework */; };
@@ -167,6 +170,9 @@
 		B0EE6D121855CAE90056BDF2 /* MoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveViewController.h; sourceTree = "<group>"; };
 		B0EE6D131855CAE90056BDF2 /* MoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveViewController.m; sourceTree = "<group>"; };
 		B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoveViewController.xib; sourceTree = "<group>"; };
+		B0F6DC1C18560954001EDB87 /* SpeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeedCell.xib; sourceTree = "<group>"; };
+		B0F6DC1E18560A26001EDB87 /* TakeTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakeTimeCell.xib; sourceTree = "<group>"; };
+		B0F6DC2018560A54001EDB87 /* FastSpeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FastSpeedCell.xib; sourceTree = "<group>"; };
 		B0FE200B1851C40800A920B3 /* Waypoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Waypoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FE200E1851C40800A920B3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B0FE20101851C40800A920B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -397,6 +403,9 @@
 		B0EE6D171855CBBA0056BDF2 /* SpeedAndDistanceCell */ = {
 			isa = PBXGroup;
 			children = (
+				B0F6DC1C18560954001EDB87 /* SpeedCell.xib */,
+				B0F6DC1E18560A26001EDB87 /* TakeTimeCell.xib */,
+				B0F6DC2018560A54001EDB87 /* FastSpeedCell.xib */,
 			);
 			path = SpeedAndDistanceCell;
 			sourceTree = "<group>";
@@ -573,6 +582,9 @@
 				B0790FDC18557BF5005827B9 /* mapapi.bundle in Resources */,
 				B0790FDD18557BF5005827B9 /* readme.txt in Resources */,
 				B0EE6D161855CAE90056BDF2 /* MoveViewController.xib in Resources */,
+				B0F6DC1D18560954001EDB87 /* SpeedCell.xib in Resources */,
+				B0F6DC1F18560A26001EDB87 /* TakeTimeCell.xib in Resources */,
+				B0F6DC2118560A54001EDB87 /* FastSpeedCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +687,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waypoint/Waypoint-Prefix.pch";
 				INFOPLIST_FILE = "Waypoint/Waypoint-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/BaiduMap_iOSSDK_v2.1.1_Lib/libs/Release$(EFFECTIVE_PLATFORM_NAME)\"",
@@ -691,6 +704,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waypoint/Waypoint-Prefix.pch";
 				INFOPLIST_FILE = "Waypoint/Waypoint-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/BaiduMap_iOSSDK_v2.1.1_Lib/libs/Release$(EFFECTIVE_PLATFORM_NAME)\"",
