@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BMapKit.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<BMKMapViewDelegate>{
+    CLLocation* _currentLocation;
+}
+@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
+
+
+@property (nonatomic, retain) NSMutableArray* points;
+@property (nonatomic, retain) BMKPolyline* routeLine;
+@property (nonatomic, retain) BMKPolylineView* routeLineView;
+@property (nonatomic, retain) CLLocationManager* locationManager;
 
 @end
