@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 
-@class ViewController;
+@class MoveViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) ViewController *viewController;
+@property (strong, nonatomic) MoveViewController *viewController;
 
 @property (strong, nonatomic) BMKMapManager *mapManager;
 

@@ -19,6 +19,9 @@
 		B0EE6D111855CA4D0056BDF2 /* NibBasedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6D101855CA4D0056BDF2 /* NibBasedTableViewCell.m */; };
 		B0EE6D151855CAE90056BDF2 /* MoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6D131855CAE90056BDF2 /* MoveViewController.m */; };
 		B0EE6D161855CAE90056BDF2 /* MoveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */; };
+		B0F192A71856A00600C79FB5 /* SpeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F192A61856A00600C79FB5 /* SpeedCell.m */; };
+		B0F192AA1856A0A600C79FB5 /* TakeTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F192A91856A0A600C79FB5 /* TakeTimeCell.m */; };
+		B0F192AE1856AB1E00C79FB5 /* PSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F192AD1856AB1E00C79FB5 /* PSLocationManager.m */; };
 		B0F6DC1D18560954001EDB87 /* SpeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F6DC1C18560954001EDB87 /* SpeedCell.xib */; };
 		B0F6DC1F18560A26001EDB87 /* TakeTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F6DC1E18560A26001EDB87 /* TakeTimeCell.xib */; };
 		B0F6DC2118560A54001EDB87 /* FastSpeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F6DC2018560A54001EDB87 /* FastSpeedCell.xib */; };
@@ -170,6 +173,12 @@
 		B0EE6D121855CAE90056BDF2 /* MoveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveViewController.h; sourceTree = "<group>"; };
 		B0EE6D131855CAE90056BDF2 /* MoveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveViewController.m; sourceTree = "<group>"; };
 		B0EE6D141855CAE90056BDF2 /* MoveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoveViewController.xib; sourceTree = "<group>"; };
+		B0F192A51856A00600C79FB5 /* SpeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedCell.h; sourceTree = "<group>"; };
+		B0F192A61856A00600C79FB5 /* SpeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeedCell.m; sourceTree = "<group>"; };
+		B0F192A81856A0A600C79FB5 /* TakeTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakeTimeCell.h; sourceTree = "<group>"; };
+		B0F192A91856A0A600C79FB5 /* TakeTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakeTimeCell.m; sourceTree = "<group>"; };
+		B0F192AC1856AB1E00C79FB5 /* PSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSLocationManager.h; sourceTree = "<group>"; };
+		B0F192AD1856AB1E00C79FB5 /* PSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSLocationManager.m; sourceTree = "<group>"; };
 		B0F6DC1C18560954001EDB87 /* SpeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpeedCell.xib; sourceTree = "<group>"; };
 		B0F6DC1E18560A26001EDB87 /* TakeTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakeTimeCell.xib; sourceTree = "<group>"; };
 		B0F6DC2018560A54001EDB87 /* FastSpeedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FastSpeedCell.xib; sourceTree = "<group>"; };
@@ -406,8 +415,21 @@
 				B0F6DC1C18560954001EDB87 /* SpeedCell.xib */,
 				B0F6DC1E18560A26001EDB87 /* TakeTimeCell.xib */,
 				B0F6DC2018560A54001EDB87 /* FastSpeedCell.xib */,
+				B0F192A51856A00600C79FB5 /* SpeedCell.h */,
+				B0F192A61856A00600C79FB5 /* SpeedCell.m */,
+				B0F192A81856A0A600C79FB5 /* TakeTimeCell.h */,
+				B0F192A91856A0A600C79FB5 /* TakeTimeCell.m */,
 			);
 			path = SpeedAndDistanceCell;
+			sourceTree = "<group>";
+		};
+		B0F192AB1856AB1E00C79FB5 /* PSLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				B0F192AC1856AB1E00C79FB5 /* PSLocationManager.h */,
+				B0F192AD1856AB1E00C79FB5 /* PSLocationManager.m */,
+			);
+			path = PSLocationManager;
 			sourceTree = "<group>";
 		};
 		B0FE20021851C40800A920B3 = {
@@ -512,6 +534,7 @@
 		B0FE20391851CC5B00A920B3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B0F192AB1856AB1E00C79FB5 /* PSLocationManager */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -600,6 +623,9 @@
 				B0FE20281851C40800A920B3 /* ViewController.m in Sources */,
 				B0EE6D111855CA4D0056BDF2 /* NibBasedTableViewCell.m in Sources */,
 				B0EE6D151855CAE90056BDF2 /* MoveViewController.m in Sources */,
+				B0F192A71856A00600C79FB5 /* SpeedCell.m in Sources */,
+				B0F192AA1856A0A600C79FB5 /* TakeTimeCell.m in Sources */,
+				B0F192AE1856AB1E00C79FB5 /* PSLocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
