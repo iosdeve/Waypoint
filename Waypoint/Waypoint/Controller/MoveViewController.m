@@ -38,10 +38,10 @@
     [[PSLocationManager sharedLocationManager] startLocationUpdates];
     
     //设置地图缩放级别
-    [_mapView setZoomLevel:11];
-    self.mapView.showsUserLocation = YES;
+    [_mapView setZoomLevel:16];
+    self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
     self.mapView.userInteractionEnabled = YES;
-    self.mapView.userTrackingMode = BMKUserTrackingModeFollowWithHeading;
+    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
     
 }
 
@@ -116,13 +116,11 @@
 
 - (void)mapView:(BMKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews
 {
-    NSLog(@"%@ ----- %@", self, NSStringFromSelector(_cmd));
-    NSLog(@"overlayViews: %@", overlayViews);
+
 }
 
 - (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay
 {
-    NSLog(@"%@ ----- %@", self, NSStringFromSelector(_cmd));
     
 	BMKOverlayView* overlayView = nil;
 	
@@ -136,7 +134,7 @@
         self.routeLineView = [[BMKPolylineView alloc] initWithPolyline:self.routeLine];
         self.routeLineView.fillColor = [UIColor redColor];
         self.routeLineView.strokeColor = [UIColor redColor];
-        self.routeLineView.lineWidth = 5;
+        self.routeLineView.lineWidth = 10;
         
 		overlayView = self.routeLineView;
 	}
@@ -158,7 +156,7 @@
     // check the move distance
     if (_points.count > 0) {
         CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
-        if (distance < 5)
+        if (distance < 20)
             return;
     }
     
@@ -168,8 +166,6 @@
     
     [_points addObject:location];
     _currentLocation = location;
-    
-    NSLog(@"points: %@", _points);
     
     [self configureRoutes];
     
@@ -227,10 +223,14 @@
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
     //self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
     speedCell.lbAverageSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.totalDistance/locationManager.totalSeconds *3600/1000];
+}
+
+- (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed{
     speedCell.lbCurrentSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.currentSpeed*3600/1000];
     speedCell.lbFastSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.fastSpeed*3600/1000];
     takeTimeCell.lbTakeTime.text=[NSString stringWithFormat:@"%.2f ",locationManager.totalSeconds];
     takeTimeCell.lbAltitude.text=[NSString stringWithFormat:@"%d ",locationManager.currentAltitude];
+
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
