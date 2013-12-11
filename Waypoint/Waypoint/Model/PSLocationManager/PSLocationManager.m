@@ -29,7 +29,7 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-static const NSUInteger kDistanceFilter = 5; // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
+static const NSUInteger kDistanceFilter = 15; // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
 static const NSUInteger kHeadingFilter = 30; // the minimum angular change (degrees) for which we want to receive heading updates (see docs for CLLocationManager.headingFilter)
 static const NSUInteger kDistanceAndSpeedCalculationInterval = 3; // the interval (seconds) at which we calculate the user's distance and speed
 static const NSUInteger kMinimumLocationUpdateInterval = 10; // the interval (seconds) at which we ping for a new location if we haven't received one yet
@@ -309,10 +309,12 @@ static const CGFloat kSpeedNotSet = -1.0;
             if (bestLocation == nil) bestLocation = newLocation;
             
             CLLocationDistance distance = [bestLocation distanceFromLocation:lastLocation];
+            
             if (canUpdateDistanceAndSpeed) self.totalDistance += distance;
             self.lastRecordedLocation = bestLocation;
             
             NSTimeInterval timeSinceLastLocation = [bestLocation.timestamp timeIntervalSinceDate:lastLocation.timestamp];
+            
             if (timeSinceLastLocation > 0) {
                 CGFloat speed = distance / timeSinceLastLocation;
                 if (speed <= 0 && [self.speedHistory count] == 0) {
@@ -338,6 +340,11 @@ static const CGFloat kSpeedNotSet = -1.0;
                             }
                         }
                         self.currentSpeed = newSpeed;
+                        NSLog(@"***%f  %f",  newSpeed,self.currentSpeed);
+                        self.currentAltitude=newLocation.altitude;
+                        if ([self.delegate respondsToSelector:@selector(locationManager:waypoint:calculatedSpeed:)]) {
+                            [self.delegate locationManager:self waypoint:self.lastRecordedLocation calculatedSpeed:self.currentSpeed];
+                        }
                         //设置最高速度
                         if (self.currentSpeed>self.fastSpeed) {
                             self.fastSpeed=self.currentSpeed;
@@ -345,10 +352,7 @@ static const CGFloat kSpeedNotSet = -1.0;
                     }
                 }
             }
-            self.currentAltitude=newLocation.altitude;
-            if ([self.delegate respondsToSelector:@selector(locationManager:waypoint:calculatedSpeed:)]) {
-                [self.delegate locationManager:self waypoint:self.lastRecordedLocation calculatedSpeed:self.currentSpeed];
-            }
+            
         }
     }
     
