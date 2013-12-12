@@ -29,7 +29,7 @@
 //  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-static const NSUInteger kDistanceFilter = 5; // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
+static const NSUInteger kDistanceFilter = 10; // the minimum distance (meters) for which we want to receive location updates (see docs for CLLocationManager.distanceFilter)
 static const NSUInteger kHeadingFilter = 30; // the minimum angular change (degrees) for which we want to receive heading updates (see docs for CLLocationManager.headingFilter)
 static const NSUInteger kDistanceAndSpeedCalculationInterval = 3; // the interval (seconds) at which we calculate the user's distance and speed
 static const NSUInteger kMinimumLocationUpdateInterval = 10; // the interval (seconds) at which we ping for a new location if we haven't received one yet
@@ -42,7 +42,7 @@ static const CGFloat kRequiredHorizontalAccuracy = 20.0; // the required accurac
 static const CGFloat kMaximumAcceptableHorizontalAccuracy = 70.0; // the maximum acceptable accuracy in meters for a location.  anything above this number will be completely ignored
 static const NSUInteger kGPSRefinementInterval = 15; // the number of seconds at which we will attempt to achieve kRequiredHorizontalAccuracy before giving up and accepting kMaximumAcceptableHorizontalAccuracy
 
-static const CGFloat kSpeedNotSet = -1.0;
+static const CGFloat kSpeedNotSet = 0.0;
 
 #import "PSLocationManager.h"
 
@@ -112,7 +112,7 @@ static const CGFloat kSpeedNotSet = -1.0;
         if ([CLLocationManager locationServicesEnabled]) {
             self.locationManager = [[CLLocationManager alloc] init];
             self.locationManager.delegate = self;
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
             self.locationManager.distanceFilter = kDistanceFilter;
             self.locationManager.headingFilter = kHeadingFilter;
         }
@@ -159,6 +159,16 @@ static const CGFloat kSpeedNotSet = -1.0;
 
 - (void)setTotalDistance:(CLLocationDistance)totalDistance {
     _totalDistance = totalDistance;
+    //得出暂停的时间，从计时中减去
+    if (self.pauseDeltaStart > 0) {
+        self.pauseDelta += ([NSDate timeIntervalSinceReferenceDate] - self.pauseDeltaStart);
+        self.pauseDeltaStart = 0;
+        NSLog(@"***Total pause=%d",(int)self.pauseDelta);
+        //通知delegate结束了暂停
+        if ([self.delegate respondsToSelector:@selector(locationManager:pauseTimeTip:)]) {
+            [self.delegate locationManager:self pauseTimeTip:NO];
+        }
+    }
     
     if (self.currentSpeed != kSpeedNotSet) {
         if ([self.delegate respondsToSelector:@selector(locationManager:distanceUpdated:)]) {
@@ -196,8 +206,13 @@ static const CGFloat kSpeedNotSet = -1.0;
 }
 
 - (void)requestNewLocation {
+    self.pauseDeltaStart = [NSDate timeIntervalSinceReferenceDate];
     [self.locationManager stopUpdatingLocation];
     [self.locationManager startUpdatingLocation];
+    NSLog(@"---------pause");
+    if ([self.delegate respondsToSelector:@selector(locationManager:pauseTimeTip:)]) {
+        [self.delegate locationManager:self pauseTimeTip:YES];
+    }
 }
 
 - (BOOL)prepLocationUpdates {
@@ -250,7 +265,7 @@ static const CGFloat kSpeedNotSet = -1.0;
 
 - (void)resetLocationUpdates {
     self.totalDistance = 0;
-    self.startTimestamp = [NSDate dateWithTimeIntervalSinceNow:0];
+    //self.startTimestamp = [NSDate dateWithTimeIntervalSinceNow:0];
     self.forceDistanceAndSpeedCalculation = NO;
     self.pauseDelta = 0;
     self.pauseDeltaStart = 0;
@@ -264,7 +279,7 @@ static const CGFloat kSpeedNotSet = -1.0;
     BOOL isStaleLocation = ([oldLocation.timestamp compare:self.startTimestamp] == NSOrderedAscending);
     
     [self.locationPingTimer invalidate];
-    
+
     if (newLocation.horizontalAccuracy <= kRequiredHorizontalAccuracy) {
         self.signalStrength = PSLocationManagerGPSSignalStrengthStrong;
     } else {
@@ -309,10 +324,19 @@ static const CGFloat kSpeedNotSet = -1.0;
             if (bestLocation == nil) bestLocation = newLocation;
             
             CLLocationDistance distance = [bestLocation distanceFromLocation:lastLocation];
-            if (canUpdateDistanceAndSpeed) self.totalDistance += distance;
+            if (canUpdateDistanceAndSpeed) {
+                self.totalDistance += distance;
+                //如果获取了探测数据，开始计时，避免静止时就已开始计时
+                if (self.startTimestamp==nil) {
+                    self.startTimestamp = [NSDate dateWithTimeIntervalSinceNow:0];
+                    NSLog(@"****start time");
+                }
+
+            }
             self.lastRecordedLocation = bestLocation;
             
             NSTimeInterval timeSinceLastLocation = [bestLocation.timestamp timeIntervalSinceDate:lastLocation.timestamp];
+           // NSLog(@"---my current spped=%.2f",[newLocation distanceFromLocation:oldLocation]/[newLocation.timestamp timeIntervalSinceDate:oldLocation.timestamp]*3600/1000);
             if (timeSinceLastLocation > 0) {
                 CGFloat speed = distance / timeSinceLastLocation;
                 if (speed <= 0 && [self.speedHistory count] == 0) {

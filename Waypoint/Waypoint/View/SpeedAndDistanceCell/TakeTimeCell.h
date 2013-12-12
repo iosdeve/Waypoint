@@ -12,4 +12,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbTakeTime;
 @property (strong, nonatomic) IBOutlet UILabel *lbAltitude;
 
+@property (strong, nonatomic) IBOutlet UILabel *lbDistance;
 @end

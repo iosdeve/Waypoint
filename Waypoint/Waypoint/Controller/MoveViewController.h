@@ -16,5 +16,6 @@
 @property (nonatomic, retain) BMKPolyline* routeLine;
 @property (nonatomic, retain) BMKPolylineView* routeLineView;
 @property (nonatomic, retain) CLLocationManager* locationManager;
+@property (strong, nonatomic) IBOutlet UILabel *lbPauseTip;
 
 @end

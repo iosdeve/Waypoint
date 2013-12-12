@@ -48,6 +48,7 @@ typedef enum {
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance;
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed;
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error;
+- (void)locationManager:(PSLocationManager *)locationManager pauseTimeTip:(BOOL) show;
 - (void)locationManager:(PSLocationManager *)locationManager debugText:(NSString *)text;
 
 @end
