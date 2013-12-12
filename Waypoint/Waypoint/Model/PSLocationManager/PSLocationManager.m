@@ -362,11 +362,6 @@ static const CGFloat kSpeedNotSet = 0.0;
                             }
                         }
                         self.currentSpeed = newSpeed;
-                        NSLog(@"***%f  %f",  newSpeed,self.currentSpeed);
-                        self.currentAltitude=newLocation.altitude;
-                        if ([self.delegate respondsToSelector:@selector(locationManager:waypoint:calculatedSpeed:)]) {
-                            [self.delegate locationManager:self waypoint:self.lastRecordedLocation calculatedSpeed:self.currentSpeed];
-                        }
                         //设置最高速度
                         if (self.currentSpeed>self.fastSpeed) {
                             self.fastSpeed=self.currentSpeed;
@@ -374,7 +369,10 @@ static const CGFloat kSpeedNotSet = 0.0;
                     }
                 }
             }
-            
+            self.currentAltitude=newLocation.altitude;
+            if ([self.delegate respondsToSelector:@selector(locationManager:waypoint:calculatedSpeed:)]) {
+                [self.delegate locationManager:self waypoint:self.lastRecordedLocation calculatedSpeed:self.currentSpeed];
+            }
         }
     }
     
