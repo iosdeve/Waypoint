@@ -62,6 +62,7 @@ typedef enum {
 @property (nonatomic, readonly) double currentSpeed;
 @property (nonatomic, readonly) double fastSpeed;
 @property (nonatomic, readonly) int currentAltitude;
+@property (nonatomic, strong) CLLocation *lastRecordedLocation;
 
 + (PSLocationManager *)sharedLocationManager;
 

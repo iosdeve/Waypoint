@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B07231EE185ADA8A00344F11 /* WayPointUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = B07231ED185ADA8A00344F11 /* WayPointUtilites.m */; };
 		B0790F4E18557B67005827B9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0790F4D18557B67005827B9 /* Security.framework */; };
 		B0790F5018557B75005827B9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0790F4F18557B75005827B9 /* SystemConfiguration.framework */; };
 		B0790F5218557B7D005827B9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0790F5118557B7D005827B9 /* OpenGLES.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B07231EC185ADA8A00344F11 /* WayPointUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayPointUtilites.h; sourceTree = "<group>"; };
+		B07231ED185ADA8A00344F11 /* WayPointUtilites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayPointUtilites.m; sourceTree = "<group>"; };
 		B0790F4D18557B67005827B9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B0790F4F18557B75005827B9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B0790F5118557B7D005827B9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -221,6 +224,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B07231EB185ADA2C00344F11 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B07231EC185ADA8A00344F11 /* WayPointUtilites.h */,
+				B07231ED185ADA8A00344F11 /* WayPointUtilites.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		B0790F5718557BF5005827B9 /* BaiduMap_iOSSDK_v2.1.1_Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,9 +448,9 @@
 			isa = PBXGroup;
 			children = (
 				B0790F5718557BF5005827B9 /* BaiduMap_iOSSDK_v2.1.1_Lib */,
-				B0FE20141851C40800A920B3 /* Waypoint */,
 				B0FE200D1851C40800A920B3 /* Frameworks */,
 				B0FE200C1851C40800A920B3 /* Products */,
+				B0FE20141851C40800A920B3 /* Waypoint */,
 			);
 			sourceTree = "<group>";
 		};
@@ -468,6 +480,7 @@
 		B0FE20141851C40800A920B3 /* Waypoint */ = {
 			isa = PBXGroup;
 			children = (
+				B07231EB185ADA2C00344F11 /* Utilities */,
 				B0FE20351851CC5B00A920B3 /* Controller */,
 				B0FE20361851CC5B00A920B3 /* Resource */,
 				B0FE20381851CC5B00A920B3 /* View */,
@@ -626,6 +639,7 @@
 				B0F192A71856A00600C79FB5 /* SpeedCell.m in Sources */,
 				B0F192AA1856A0A600C79FB5 /* TakeTimeCell.m in Sources */,
 				B0F192AE1856AB1E00C79FB5 /* PSLocationManager.m in Sources */,
+				B07231EE185ADA8A00344F11 /* WayPointUtilites.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

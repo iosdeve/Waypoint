@@ -12,6 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lbCurrentSpeed;
 @property (strong, nonatomic) IBOutlet UILabel *lbAverageSpeed;
-@property (strong, nonatomic) IBOutlet UILabel *lbFastSpeed;
+@property (strong, nonatomic) IBOutlet UILabel *lbTakeTime;
 
 @end

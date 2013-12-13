@@ -9,6 +9,7 @@
 #import "MoveViewController.h"
 #import "SpeedCell.h"
 #import "TakeTimeCell.h"
+#import "WayPointUtilites.h"
 
 @interface MoveViewController (){
     SpeedCell *speedCell;
@@ -32,16 +33,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [PSLocationManager sharedLocationManager].delegate = self;
-    [[PSLocationManager sharedLocationManager] prepLocationUpdates];
-    [[PSLocationManager sharedLocationManager] startLocationUpdates];
-    
     //设置地图缩放级别
     [_mapView setZoomLevel:16];
-    self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
-    self.mapView.userInteractionEnabled = YES;
-    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
+//    self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
+//    self.mapView.userInteractionEnabled = YES;
+//    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
+    
+    _mapView.showsUserLocation = NO;//先关闭显示的定位图层
+    _mapView.userTrackingMode = BMKUserTrackingModeNone;//设置定位的状态
+    _mapView.showsUserLocation = YES;//显示定位图层
+
     
 }
 
@@ -142,10 +143,7 @@
 	return overlayView;
 }
 
-- (void)mapView:(BMKMapView *)mapView didUpdateUserLocation:(BMKUserLocation *)userLocation
-{
-   // NSLog(@"%@ ----- %@", self, NSStringFromSelector(_cmd));
-    
+-(void) updateMapPoints: (CLLocation *) userLocation{
     CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude
                                                       longitude:userLocation.coordinate.longitude];
     // check the zero point
@@ -156,7 +154,7 @@
     // check the move distance
     if (_points.count > 0) {
         CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
-        if (distance < 150)
+        if (distance < 50)
             return;
     }
     
@@ -171,6 +169,38 @@
     
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
     [self.mapView setCenterCoordinate:coordinate animated:YES];
+    
+}
+
+- (void)mapView:(BMKMapView *)mapView didUpdateUserLocation:(BMKUserLocation *)userLocation
+{
+//   // NSLog(@"%@ ----- %@", self, NSStringFromSelector(_cmd));
+//    
+//    CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude
+//                                                      longitude:userLocation.coordinate.longitude];
+//    // check the zero point
+//    if  (userLocation.coordinate.latitude == 0.0f ||
+//         userLocation.coordinate.longitude == 0.0f)
+//        return;
+//    
+//    // check the move distance
+//    if (_points.count > 0) {
+//        CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
+//        if (distance < 100)
+//            return;
+//    }
+//    
+//    if (nil == _points) {
+//        _points = [[NSMutableArray alloc] init];
+//    }
+//    
+//    [_points addObject:location];
+//    _currentLocation = location;
+//    
+//    [self configureRoutes];
+//    
+//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+//    [self.mapView setCenterCoordinate:coordinate animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -180,7 +210,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated {
     [_mapView viewWillDisappear];
-    _mapView.delegate = nil; // 不用时，置nil
+    //_mapView.delegate = nil; // 不用时，置nil
 }
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -223,14 +253,15 @@
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
     //self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
     speedCell.lbAverageSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.totalDistance/locationManager.totalSeconds *3600/1000];
-    takeTimeCell.lbDistance.text=[NSString stringWithFormat:@"%d", (int)distance];
-    takeTimeCell.lbTakeTime.text=[NSString stringWithFormat:@"%.2f ",locationManager.totalSeconds];
+    takeTimeCell.lbDistance.text=[NSString stringWithFormat:@"%.2f", (float)distance/1000];
+    speedCell.lbTakeTime.text=[NSString stringWithFormat:@"%@ ",[WayPointUtilites formatSeconds:locationManager.totalSeconds]];
     takeTimeCell.lbAltitude.text=[NSString stringWithFormat:@"%d ",locationManager.currentAltitude];
+    
+    [self updateMapPoints:locationManager.lastRecordedLocation];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed{
     speedCell.lbCurrentSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.currentSpeed*3600/1000];
-    speedCell.lbFastSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.fastSpeed*3600/1000];
 }
 
 //控制自动暂停文字的显示
@@ -248,4 +279,20 @@
 }
 
 
+- (IBAction)beginOrStopTraveal:(id)sender {
+    if (self.setOffItem.tag==0) {
+        self.setOffItem.tag=1;
+        self.setOffItem.title=@"结束";
+        [PSLocationManager sharedLocationManager].delegate = self;
+        [[PSLocationManager sharedLocationManager] prepLocationUpdates];
+        [[PSLocationManager sharedLocationManager] startLocationUpdates];
+    }else{
+        self.setOffItem.tag=0;
+        self.setOffItem.title=@"出发";
+        [PSLocationManager sharedLocationManager].delegate = nil;
+        [[PSLocationManager sharedLocationManager] stopLocationUpdates];
+        [[PSLocationManager sharedLocationManager] resetLocationUpdates];
+    }
+    
+}
 @end

@@ -42,7 +42,7 @@
 							<object class="IBUILabel" id="575085082">
 								<reference key="NSNextResponder" ref="341465385"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 8}, {88, 21}}</string>
+								<string key="NSFrame">{{20, 8}, {88, 21}}</string>
 								<reference key="NSSuperview" ref="341465385"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="64528972"/>
@@ -76,7 +76,7 @@
 							<object class="IBUILabel" id="214506733">
 								<reference key="NSNextResponder" ref="341465385"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{5, 37}, {79, 21}}</string>
+								<string key="NSFrame">{{20, 37}, {79, 26}}</string>
 								<reference key="NSSuperview" ref="341465385"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="16381641"/>
@@ -86,7 +86,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">00</string>
+								<string key="IBUIText">0.00</string>
 								<object class="NSColor" key="IBUITextColor" id="307956408">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -108,7 +108,7 @@
 							<object class="IBUILabel" id="64528972">
 								<reference key="NSNextResponder" ref="341465385"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{108, 8}, {88, 21}}</string>
+								<string key="NSFrame">{{128, 8}, {88, 21}}</string>
 								<reference key="NSSuperview" ref="341465385"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="947233430"/>
@@ -129,7 +129,7 @@
 							<object class="IBUILabel" id="947233430">
 								<reference key="NSNextResponder" ref="341465385"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{227, 8}, {88, 21}}</string>
+								<string key="NSFrame">{{250, 8}, {61, 21}}</string>
 								<reference key="NSSuperview" ref="341465385"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="214506733"/>
@@ -139,7 +139,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">最高速度 km/h</string>
+								<string key="IBUIText">时间</string>
 								<reference key="IBUITextColor" ref="642267108"/>
 								<reference key="IBUIHighlightedColor" ref="357366754"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -150,17 +150,17 @@
 							<object class="IBUILabel" id="16381641">
 								<reference key="NSNextResponder" ref="341465385"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{108, 37}, {97, 21}}</string>
+								<string key="NSFrame">{{128, 37}, {97, 26}}</string>
 								<reference key="NSSuperview" ref="341465385"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="126141259"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">00</string>
+								<string key="IBUIText">0.00</string>
 								<reference key="IBUITextColor" ref="307956408"/>
 								<reference key="IBUIHighlightedColor" ref="357366754"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -171,17 +171,16 @@
 							<object class="IBUILabel" id="126141259">
 								<reference key="NSNextResponder" ref="341465385"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{227, 37}, {84, 21}}</string>
+								<string key="NSFrame">{{228, 37}, {92, 26}}</string>
 								<reference key="NSSuperview" ref="341465385"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">00</string>
+								<string key="IBUIText">00:00:00</string>
 								<reference key="IBUITextColor" ref="307956408"/>
 								<reference key="IBUIHighlightedColor" ref="357366754"/>
 								<int key="IBUIBaselineAdjustment">0</int>
@@ -236,11 +235,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lbFastSpeed</string>
+						<string key="label">lbTakeTime</string>
 						<reference key="source" ref="825770815"/>
 						<reference key="destination" ref="126141259"/>
 					</object>
-					<int key="connectionID">16</int>
+					<int key="connectionID">18</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -324,7 +323,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">18</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -342,7 +341,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="lbAverageSpeed">UILabel</string>
 						<string key="lbCurrentSpeed">UILabel</string>
-						<string key="lbFastSpeed">UILabel</string>
+						<string key="lbTakeTime">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="lbAverageSpeed">
@@ -353,8 +352,8 @@
 							<string key="name">lbCurrentSpeed</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="lbFastSpeed">
-							<string key="name">lbFastSpeed</string>
+						<object class="IBToOneOutletInfo" key="lbTakeTime">
+							<string key="name">lbTakeTime</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 					</dictionary>
