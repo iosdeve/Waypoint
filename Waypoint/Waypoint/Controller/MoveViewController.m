@@ -35,14 +35,9 @@
     [super viewDidLoad];
     //设置地图缩放级别
     [_mapView setZoomLevel:16];
-//    self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
-//    self.mapView.userInteractionEnabled = YES;
-//    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
-    
-    _mapView.showsUserLocation = NO;//先关闭显示的定位图层
-    _mapView.userTrackingMode = BMKUserTrackingModeNone;//设置定位的状态
-    _mapView.showsUserLocation = YES;//显示定位图层
-
+    self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
+    self.mapView.userInteractionEnabled = YES;
+    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
     
 }
 
@@ -143,64 +138,34 @@
 	return overlayView;
 }
 
--(void) updateMapPoints: (CLLocation *) userLocation{
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude
-                                                      longitude:userLocation.coordinate.longitude];
-    // check the zero point
-    if  (userLocation.coordinate.latitude == 0.0f ||
-         userLocation.coordinate.longitude == 0.0f)
-        return;
-    
-    // check the move distance
-    if (_points.count > 0) {
-        CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
-        if (distance < 50)
-            return;
-    }
-    
-    if (nil == _points) {
-        _points = [[NSMutableArray alloc] init];
-    }
-    
-    [_points addObject:location];
-    _currentLocation = location;
-    
-    [self configureRoutes];
-    
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
-    [self.mapView setCenterCoordinate:coordinate animated:YES];
-    
-}
-
 - (void)mapView:(BMKMapView *)mapView didUpdateUserLocation:(BMKUserLocation *)userLocation
 {
-//   // NSLog(@"%@ ----- %@", self, NSStringFromSelector(_cmd));
-//    
-//    CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude
-//                                                      longitude:userLocation.coordinate.longitude];
-//    // check the zero point
-//    if  (userLocation.coordinate.latitude == 0.0f ||
-//         userLocation.coordinate.longitude == 0.0f)
-//        return;
-//    
-//    // check the move distance
-//    if (_points.count > 0) {
-//        CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
-//        if (distance < 100)
-//            return;
-//    }
-//    
-//    if (nil == _points) {
-//        _points = [[NSMutableArray alloc] init];
-//    }
-//    
-//    [_points addObject:location];
-//    _currentLocation = location;
-//    
-//    [self configureRoutes];
-//    
-//    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
-//    [self.mapView setCenterCoordinate:coordinate animated:YES];
+    if(self.setOffItem.tag==1){
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude
+                                                          longitude:userLocation.coordinate.longitude];
+        // check the zero point
+        if  (userLocation.coordinate.latitude == 0.0f ||
+             userLocation.coordinate.longitude == 0.0f)
+            return;
+        
+        // check the move distance
+        if (_points.count > 0) {
+            CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
+            if (distance < 50)
+                return;
+        }
+        
+        if (nil == _points) {
+            _points = [[NSMutableArray alloc] init];
+        }
+        
+        [_points addObject:location];
+        _currentLocation = location;
+        
+        [self configureRoutes];
+    }
+    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
+    [self.mapView setCenterCoordinate:coordinate animated:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -256,8 +221,6 @@
     takeTimeCell.lbDistance.text=[NSString stringWithFormat:@"%.2f", (float)distance/1000];
     speedCell.lbTakeTime.text=[NSString stringWithFormat:@"%@ ",[WayPointUtilites formatSeconds:locationManager.totalSeconds]];
     takeTimeCell.lbAltitude.text=[NSString stringWithFormat:@"%d ",locationManager.currentAltitude];
-    
-    [self updateMapPoints:locationManager.lastRecordedLocation];
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed{
