@@ -9,13 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 #import "PSLocationManager.h"
+#import <MapKit/MapKit.h>
 
-@interface MoveViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, BMKMapViewDelegate, PSLocationManagerDelegate>
-@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
-@property (nonatomic, retain) NSMutableArray* points;
-@property (nonatomic, retain) BMKPolyline* routeLine;
-@property (nonatomic, retain) BMKPolylineView* routeLineView;
-@property (nonatomic, retain) CLLocationManager* locationManager;
+@interface MoveViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, MKMapViewDelegate, PSLocationManagerDelegate>
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+
 @property (strong, nonatomic) IBOutlet UILabel *lbPauseTip;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *setOffItem;
 - (IBAction)beginOrStopTraveal:(id)sender;

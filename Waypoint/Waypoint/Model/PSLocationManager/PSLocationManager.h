@@ -31,8 +31,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Track.h"
 
 @class PSLocationManager;
+@class Track;
 
 typedef enum {
     PSLocationManagerGPSSignalStrengthInvalid = 0
@@ -49,6 +51,7 @@ typedef enum {
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed;
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error;
 - (void)locationManager:(PSLocationManager *)locationManager pauseTimeTip:(BOOL) show;
+- (void)locationManager:(PSLocationManager *)locationManager updateOverlay:(Track *) track;
 - (void)locationManager:(PSLocationManager *)locationManager debugText:(NSString *)text;
 
 @end
@@ -63,6 +66,7 @@ typedef enum {
 @property (nonatomic, readonly) double fastSpeed;
 @property (nonatomic, readonly) int currentAltitude;
 @property (nonatomic, strong) CLLocation *lastRecordedLocation;
+@property (strong, nonatomic) Track *track;
 
 + (PSLocationManager *)sharedLocationManager;
 

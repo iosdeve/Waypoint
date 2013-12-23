@@ -10,6 +10,9 @@
 #import "SpeedCell.h"
 #import "TakeTimeCell.h"
 #import "WayPointUtilites.h"
+#import <GPX/GPX.h>
+#import "TrackPoint.h"
+
 
 @interface MoveViewController (){
     SpeedCell *speedCell;
@@ -34,10 +37,25 @@
 {
     [super viewDidLoad];
     //设置地图缩放级别
-    [_mapView setZoomLevel:16];
+    //[_mapView setZoomLevel:16];
     self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
     self.mapView.userInteractionEnabled = YES;
-    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
+    self.mapView.userTrackingMode = MKUserTrackingModeNone;
+    
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init];//创建位置管理器
+    locationManager.desiredAccuracy=kCLLocationAccuracyBest;//指定需要的精度级别
+    locationManager.distanceFilter=1000.0f;//设置距离筛选器
+    [locationManager startUpdatingLocation];//启动位置管理器
+    MKCoordinateSpan theSpan;
+    //地图的范围 越小越精确
+    theSpan.latitudeDelta=0.04;
+    theSpan.longitudeDelta=0.04;
+    MKCoordinateRegion theRegion;
+    theRegion.center=[[locationManager location] coordinate];
+    theRegion.span=theSpan;
+    [self.mapView setRegion:theRegion];
+    [locationManager stopUpdatingLocation];
+    locationManager=nil;
     
 }
 
@@ -47,136 +65,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)configureRoutes
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
 {
-    // define minimum, maximum points
-	BMKMapPoint northEastPoint = BMKMapPointMake(0.f, 0.f);
-	BMKMapPoint southWestPoint = BMKMapPointMake(0.f, 0.f);
-	
-	// create a c array of points.
-	BMKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * _points.count);
+    MKPolylineView *overlayView = [[MKPolylineView alloc] initWithOverlay:overlay];
+    overlayView.strokeColor = [UIColor blueColor];
+    overlayView.lineWidth = 5.f;
     
-	// for(int idx = 0; idx < pointStrings.count; idx++)
-    for(int idx = 0; idx < _points.count; idx++)
-	{
-        CLLocation *location = [_points objectAtIndex:idx];
-        CLLocationDegrees latitude  = location.coordinate.latitude;
-		CLLocationDegrees longitude = location.coordinate.longitude;
-        
-		// create our coordinate and add it to the correct spot in the array
-		CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-		BMKMapPoint point = BMKMapPointForCoordinate(coordinate);
-		
-		// if it is the first point, just use them, since we have nothing to compare to yet.
-		if (idx == 0) {
-			northEastPoint = point;
-			southWestPoint = point;
-		} else {
-			if (point.x > northEastPoint.x)
-				northEastPoint.x = point.x;
-			if(point.y > northEastPoint.y)
-				northEastPoint.y = point.y;
-			if (point.x < southWestPoint.x)
-				southWestPoint.x = point.x;
-			if (point.y < southWestPoint.y)
-				southWestPoint.y = point.y;
-		}
-        
-		pointArray[idx] = point;
-	}
-	
-    if (self.routeLine) {
-        [self.mapView removeOverlay:self.routeLine];
-    }
-    
-    self.routeLine = [BMKPolyline polylineWithPoints:pointArray count:_points.count];
-    
-    // add the overlay to the map
-	if (nil != self.routeLine) {
-		[self.mapView addOverlay:self.routeLine];
-	}
-    
-    // clear the memory allocated earlier for the points
-	free(pointArray);
-    
-    /*
-     double width = northEastPoint.x - southWestPoint.x;
-     double height = northEastPoint.y - southWestPoint.y;
-     
-     _routeRect = MKMapRectMake(southWestPoint.x, southWestPoint.y, width, height);
-     
-     // zoom in on the route.
-     [self.mapView setVisibleMapRect:_routeRect];
-     */
+    return overlayView;
 }
 
-- (void)mapView:(BMKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews
-{
-
-}
-
-- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay
-{
-    
-	BMKOverlayView* overlayView = nil;
-	
-	if(overlay == self.routeLine)
-	{
-		//if we have not yet created an overlay view for this overlay, create it now.
-        if (self.routeLineView) {
-            [self.routeLineView removeFromSuperview];
-        }
-        
-        self.routeLineView = [[BMKPolylineView alloc] initWithPolyline:self.routeLine];
-        self.routeLineView.fillColor = [UIColor redColor];
-        self.routeLineView.strokeColor = [UIColor redColor];
-        self.routeLineView.lineWidth = 7;
-        
-		overlayView = self.routeLineView;
-	}
-	
-	return overlayView;
-}
-
-- (void)mapView:(BMKMapView *)mapView didUpdateUserLocation:(BMKUserLocation *)userLocation
-{
-    if(self.setOffItem.tag==1){
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:userLocation.coordinate.latitude
-                                                          longitude:userLocation.coordinate.longitude];
-        // check the zero point
-        if  (userLocation.coordinate.latitude == 0.0f ||
-             userLocation.coordinate.longitude == 0.0f)
-            return;
-        
-        // check the move distance
-        if (_points.count > 0) {
-            CLLocationDistance distance = [location distanceFromLocation:_currentLocation];
-            if (distance < 50)
-                return;
-        }
-        
-        if (nil == _points) {
-            _points = [[NSMutableArray alloc] init];
-        }
-        
-        [_points addObject:location];
-        _currentLocation = location;
-        
-        [self configureRoutes];
-    }
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude);
-    [self.mapView setCenterCoordinate:coordinate animated:NO];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [_mapView viewWillAppear];
-    _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-}
-
--(void)viewWillDisappear:(BOOL)animated {
-    [_mapView viewWillDisappear];
-    //_mapView.delegate = nil; // 不用时，置nil
-}
 
 -(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -216,24 +113,57 @@
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager distanceUpdated:(CLLocationDistance)distance {
-    //self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
-    speedCell.lbAverageSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.totalDistance/locationManager.totalSeconds *3600/1000];
-    takeTimeCell.lbDistance.text=[NSString stringWithFormat:@"%.2f", (float)distance/1000];
-    speedCell.lbTakeTime.text=[NSString stringWithFormat:@"%@ ",[WayPointUtilites formatSeconds:locationManager.totalSeconds]];
-    takeTimeCell.lbAltitude.text=[NSString stringWithFormat:@"%d ",locationManager.currentAltitude];
+    if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive){
+        //self.distanceLabel.text = [NSString stringWithFormat:@"%.2f %@", distance, NSLocalizedString(@"meters", @"")];
+        speedCell.lbAverageSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.totalDistance/locationManager.totalSeconds *3600/1000];
+        takeTimeCell.lbDistance.text=[NSString stringWithFormat:@"%.2f", (float)distance/1000];
+        speedCell.lbTakeTime.text=[NSString stringWithFormat:@"%@ ",[WayPointUtilites formatSeconds:locationManager.totalSeconds]];
+        takeTimeCell.lbAltitude.text=[NSString stringWithFormat:@"%d ",locationManager.currentAltitude];
+    }
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager waypoint:(CLLocation *)waypoint calculatedSpeed:(double)calculatedSpeed{
-    speedCell.lbCurrentSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.currentSpeed*3600/1000];
+    if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive){
+        speedCell.lbCurrentSpeed.text=[NSString stringWithFormat:@"%.2f ",locationManager.currentSpeed*3600/1000];
+    }
 }
 
 //控制自动暂停文字的显示
 - (void)locationManager:(PSLocationManager *)locationManager pauseTimeTip:(BOOL) show{
-    if (show) {
-        self.lbPauseTip.hidden=NO;
-    }else{
-        self.lbPauseTip.hidden=YES;
+    if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive){
+        if (show) {
+            self.lbPauseTip.hidden=NO;
+        }else{
+            self.lbPauseTip.hidden=YES;
+        }
     }
+}
+//在地图上生成点的运动轨迹
+- (void)locationManager:(PSLocationManager *)locationManager updateOverlay:(Track *) track{
+    if (UIApplication.sharedApplication.applicationState == UIApplicationStateActive){
+        if (!track) {
+            return;
+        }
+        
+        NSArray *trackPoints = track.sotredTrackPoints;
+        
+        CLLocationCoordinate2D coors[trackPoints.count];
+        
+        int i = 0;
+        for (TrackPoint *trackPoint in trackPoints) {
+            coors[i] = trackPoint.coordinate;
+            i++;
+        }
+        
+        MKPolyline *line = [MKPolyline polylineWithCoordinates:coors count:trackPoints.count];
+        
+        // replace overlay
+        [self.mapView removeOverlays:self.mapView.overlays];
+        [self.mapView addOverlay:line];
+        //设置新位置居中
+        [self.mapView setCenterCoordinate:coors[0] animated:YES];
+    }
+    
 }
 
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {

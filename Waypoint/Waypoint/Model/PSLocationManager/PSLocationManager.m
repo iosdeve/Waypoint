@@ -45,6 +45,9 @@ static const NSUInteger kGPSRefinementInterval = 15; // the number of seconds at
 static const CGFloat kSpeedNotSet = 0.0;
 
 #import "PSLocationManager.h"
+#import "NSManagedObject+InnerBand.h"
+#import <GPX/GPX.h>
+#import "TrackPoint.h"
 
 @interface PSLocationManager ()
 
@@ -231,6 +234,10 @@ static const CGFloat kSpeedNotSet = 0.0;
         
         [self checkSustainedSignalStrength];
         
+        self.track = [Track create];
+        self.track.created = [NSDate date];
+        [[CoreDataStore mainStore] save];
+        
         return YES;
     } else {
         return NO;
@@ -271,10 +278,26 @@ static const CGFloat kSpeedNotSet = 0.0;
     self.pauseDeltaStart = 0;
 }
 
+- (void)startLogging
+{
+    // initialize location manager
+    if (![CLLocationManager locationServicesEnabled]) {
+        NSLog(@"Location failed!");
+    } else {
+        self.locationManager = [CLLocationManager new];
+        self.locationManager.delegate = self;
+        [self.locationManager startUpdatingLocation];
+        
+        self.track = [Track create];
+        self.track.created = [NSDate date];
+        [[CoreDataStore mainStore] save];
+    }
+}
+
+
 #pragma mark CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    NSLog(@"-----GPS");
     // since the oldLocation might be from some previous use of core location, we need to make sure we're getting data from this run
     if (oldLocation == nil) return;
     BOOL isStaleLocation = ([oldLocation.timestamp compare:self.startTimestamp] == NSOrderedAscending);
@@ -331,6 +354,29 @@ static const CGFloat kSpeedNotSet = 0.0;
                 if (self.startTimestamp==nil) {
                     self.startTimestamp = [NSDate dateWithTimeIntervalSinceNow:0];
                     NSLog(@"****start time");
+                }
+                
+                if (distance>30) {
+                    if (bestLocation) {
+                        TrackPoint *trackpoint = [TrackPoint create];
+                        trackpoint.latitude = [NSNumber numberWithFloat:bestLocation.coordinate.latitude];
+                        trackpoint.longitude = [NSNumber numberWithFloat:bestLocation.coordinate.longitude];
+                        trackpoint.altitude = [NSNumber numberWithFloat:bestLocation.altitude];
+                        trackpoint.created = [NSDate date];
+                        [self.track addTrackpointsObject:trackpoint];
+                        
+                        [[CoreDataStore mainStore] save];
+                        
+                        if ([self.delegate respondsToSelector:@selector(locationManager:updateOverlay:)]) {
+                            [self.delegate locationManager:self updateOverlay:self.track];
+                        }
+                        
+                        // update annotation and overlay
+                        //[self updateOverlay];
+                        
+                        // set new location as center
+                        //[self.mapView setCenterCoordinate:newLocation.coordinate animated:YES];
+                    }
                 }
 
             }
