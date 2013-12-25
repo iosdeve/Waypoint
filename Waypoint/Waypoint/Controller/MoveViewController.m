@@ -20,6 +20,8 @@
     CLLocation* _currentLocation;
 }
 
+@property(nonatomic, retain) CLLocationManager *locationManager;
+
 @end
 
 @implementation MoveViewController
@@ -36,28 +38,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //设置地图缩放级别
-    //[_mapView setZoomLevel:16];
-    self.mapView.showsUserLocation = YES;//先关闭显示的定位图层
     self.mapView.userInteractionEnabled = YES;
-    self.mapView.userTrackingMode = MKUserTrackingModeNone;
-    
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init];//创建位置管理器
-    locationManager.desiredAccuracy=kCLLocationAccuracyBest;//指定需要的精度级别
-    locationManager.distanceFilter=1000.0f;//设置距离筛选器
-    [locationManager startUpdatingLocation];//启动位置管理器
-    MKCoordinateSpan theSpan;
-    //地图的范围 越小越精确
-    theSpan.latitudeDelta=0.04;
-    theSpan.longitudeDelta=0.04;
-    MKCoordinateRegion theRegion;
-    theRegion.center=[[locationManager location] coordinate];
-    theRegion.span=theSpan;
-    [self.mapView setRegion:theRegion];
-    [locationManager stopUpdatingLocation];
-    locationManager=nil;
+    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
+    if([CLLocationManager locationServicesEnabled]){
+        self.locationManager = [[CLLocationManager alloc] init];//创建位置管理器
+        self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;//指定需要的精度级别
+        self.locationManager.distanceFilter=20.0f;//设置距离筛选器
+        self.locationManager.delegate=self;
+        [self.locationManager startUpdatingLocation];//启动位置管理器
+    }
     
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -65,11 +58,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay
+-(void) viewDidAppear:(BOOL)animated{
+    self.mapView.showsUserLocation = YES;//显示的定位图层
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [self.mapView viewWillAppear];
+    self.mapView.delegate=self;
+}
+
+- (void) viewWillDisappear:(BOOL)animated{
+    [self.mapView viewWillDisappear];
+    self.mapView.delegate=nil;
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager=nil;
+}
+
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id<BMKOverlay>)overlay
 {
-    MKPolylineView *overlayView = [[MKPolylineView alloc] initWithOverlay:overlay];
+    BMKPolylineView *overlayView = [[BMKPolylineView alloc] initWithOverlay:overlay];
     overlayView.strokeColor = [UIColor blueColor];
-    overlayView.lineWidth = 5.f;
+    overlayView.lineWidth = 7.f;
     
     return overlayView;
 }
@@ -155,13 +164,13 @@
             i++;
         }
         
-        MKPolyline *line = [MKPolyline polylineWithCoordinates:coors count:trackPoints.count];
+        BMKPolyline *line = [BMKPolyline polylineWithCoordinates:coors count:trackPoints.count];
         
         // replace overlay
         [self.mapView removeOverlays:self.mapView.overlays];
         [self.mapView addOverlay:line];
         //设置新位置居中
-        [self.mapView setCenterCoordinate:coors[0] animated:YES];
+        [self.mapView setCenterCoordinate:coors[trackPoints.count-1] animated:YES];
     }
     
 }
@@ -169,6 +178,43 @@
 - (void)locationManager:(PSLocationManager *)locationManager error:(NSError *)error {
     // location services is probably not enabled for the app
 
+}
+
+
+#pragma mark - CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    switch (error.code) {
+        case kCLErrorLocationUnknown:
+            NSLog(@"The location manager was unable to obtain a location value right now.");
+            break;
+        case kCLErrorDenied:
+            NSLog(@"Access to the location service was denied by the user.");
+            break;
+        case kCLErrorNetwork:
+            NSLog(@"The network was unavailable or a network error occurred.");
+            break;
+        default:
+            NSLog(@"未定义错误");
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    BMKCoordinateSpan theSpan;
+    //地图的范围 越小越精确
+    theSpan.latitudeDelta=0.02;
+    theSpan.longitudeDelta=0.02;
+    BMKCoordinateRegion theRegion;
+    float lat=(float)[[self.locationManager location] coordinate].latitude;
+    float lon=(float)[[self.locationManager location] coordinate].longitude;
+    NSLog(@"%.2f      %.2f",lat,lon);
+    theRegion.center=[WayPointUtilites getBaiduFromGoogle:[[self.locationManager location] coordinate]];
+    theRegion.span=theSpan;
+    [self.mapView setRegion:theRegion];
+    // 停止更新
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager.delegate=nil;
 }
 
 

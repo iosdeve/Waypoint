@@ -8,6 +8,11 @@
 
 #import "WayPointUtilites.h"
 
+UIKIT_EXTERN NSDictionary* BMKBaiduCoorForWgs84(CLLocationCoordinate2D coorWgs84);
+UIKIT_EXTERN NSDictionary* BMKBaiduCoorForGcj(CLLocationCoordinate2D coorGcj);
+UIKIT_EXTERN CLLocationCoordinate2D BMKCoorDictionaryDecode(NSDictionary* dictionary);
+
+
 @implementation WayPointUtilites
 
 +(NSString *) formatSeconds:(NSTimeInterval) seconds{
@@ -25,6 +30,23 @@
 //    
 //    return currentDateStr;
 
+}
+
++ (CLLocationCoordinate2D )getBaiduFromGoogle:(CLLocationCoordinate2D )locationCoord
+{
+    NSDictionary *baidudict =BMKBaiduCoorForGcj(CLLocationCoordinate2DMake(locationCoord.latitude, locationCoord.longitude));
+    //NSLog(@"google坐标是:%f,%f",locationCoord.latitude,locationCoord.longitude);
+    NSString *xbase64 =[baidudict objectForKey:@"x"];
+    NSString *ybase64 = [baidudict objectForKey:@"y"];
+    NSData *xdata = [GTMBase64 decodeString:xbase64];
+    NSData *ydata = [GTMBase64 decodeString:ybase64];
+    NSString *xstr = [[NSString alloc] initWithData:xdata encoding:NSUTF8StringEncoding];
+    NSString *ystr = [[NSString alloc] initWithData:ydata encoding:NSUTF8StringEncoding];
+    CLLocationCoordinate2D result;
+    result.latitude =[ystr floatValue];
+    result.longitude = [xstr floatValue];
+    //NSLog(@"百度坐标是:%f,%f",result.latitude,result.longitude);
+    return result;
 }
 
 @end

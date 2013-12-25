@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B000F3981869769C00EE4BA6 /* SuZhou.gpx in Resources */ = {isa = PBXBuildFile; fileRef = B000F3971869769C00EE4BA6 /* SuZhou.gpx */; };
+		B000F39D186AC06A00EE4BA6 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = B000F39B186AC06A00EE4BA6 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B02618A918680982009DA689 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02618A818680982009DA689 /* MapKit.framework */; };
 		B07231EE185ADA8A00344F11 /* WayPointUtilites.m in Sources */ = {isa = PBXBuildFile; fileRef = B07231ED185ADA8A00344F11 /* WayPointUtilites.m */; };
 		B0790F4E18557B67005827B9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0790F4D18557B67005827B9 /* Security.framework */; };
@@ -62,6 +64,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B000F3971869769C00EE4BA6 /* SuZhou.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SuZhou.gpx; sourceTree = "<group>"; };
+		B000F39A186AC06A00EE4BA6 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		B000F39B186AC06A00EE4BA6 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		B000F39C186AC06A00EE4BA6 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		B02618A818680982009DA689 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B07231EC185ADA8A00344F11 /* WayPointUtilites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WayPointUtilites.h; sourceTree = "<group>"; };
 		B07231ED185ADA8A00344F11 /* WayPointUtilites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WayPointUtilites.m; sourceTree = "<group>"; };
@@ -291,9 +297,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B000F399186AC06A00EE4BA6 /* GTM */ = {
+			isa = PBXGroup;
+			children = (
+				B000F39A186AC06A00EE4BA6 /* GTMBase64.h */,
+				B000F39B186AC06A00EE4BA6 /* GTMBase64.m */,
+				B000F39C186AC06A00EE4BA6 /* GTMDefines.h */,
+			);
+			path = GTM;
+			sourceTree = "<group>";
+		};
 		B07231EB185ADA2C00344F11 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				B000F399186AC06A00EE4BA6 /* GTM */,
 				B07231EC185ADA8A00344F11 /* WayPointUtilites.h */,
 				B07231ED185ADA8A00344F11 /* WayPointUtilites.m */,
 			);
@@ -514,6 +531,7 @@
 		B0FE20021851C40800A920B3 = {
 			isa = PBXGroup;
 			children = (
+				B000F3971869769C00EE4BA6 /* SuZhou.gpx */,
 				B0790F5718557BF5005827B9 /* BaiduMap_iOSSDK_v2.1.1_Lib */,
 				B0FE200D1851C40800A920B3 /* Frameworks */,
 				B0FE200C1851C40800A920B3 /* Products */,
@@ -781,6 +799,7 @@
 				B0FE20251851C40800A920B3 /* Default-568h@2x.png in Resources */,
 				B0FE202B1851C40800A920B3 /* ViewController.xib in Resources */,
 				B0790FDC18557BF5005827B9 /* mapapi.bundle in Resources */,
+				B000F3981869769C00EE4BA6 /* SuZhou.gpx in Resources */,
 				B0FF2E201863EAE800ADC6FA /* README.md in Resources */,
 				B0790FDD18557BF5005827B9 /* readme.txt in Resources */,
 				B0EE6D161855CAE90056BDF2 /* MoveViewController.xib in Resources */,
@@ -824,6 +843,7 @@
 				B07231EE185ADA8A00344F11 /* WayPointUtilites.m in Sources */,
 				B0FF2E191863EAE800ADC6FA /* NSString+InnerBand.m in Sources */,
 				B0FF2E1F1863EAE800ADC6FA /* CoreDataStore.m in Sources */,
+				B000F39D186AC06A00EE4BA6 /* GTMBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,8 +930,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/steven/Downloads/iOS-GPX-Framework-20121218",
-					"/Users/steven/opensource_project/my-source/Waypoint/Waypoint",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waypoint/Waypoint-Prefix.pch";
@@ -933,8 +952,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/steven/Downloads/iOS-GPX-Framework-20121218",
-					"/Users/steven/opensource_project/my-source/Waypoint/Waypoint",
+					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Waypoint/Waypoint-Prefix.pch";

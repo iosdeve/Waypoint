@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 #import "PSLocationManager.h"
-#import <MapKit/MapKit.h>
 
-@interface MoveViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, MKMapViewDelegate, PSLocationManagerDelegate>
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@interface MoveViewController : UIViewController<UITableViewDataSource,UITableViewDelegate, BMKMapViewDelegate, PSLocationManagerDelegate,CLLocationManagerDelegate>
+@property (strong, nonatomic) IBOutlet BMKMapView *mapView;
 
 @property (strong, nonatomic) IBOutlet UILabel *lbPauseTip;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *setOffItem;

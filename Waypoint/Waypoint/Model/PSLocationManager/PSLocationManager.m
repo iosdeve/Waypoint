@@ -48,6 +48,7 @@ static const CGFloat kSpeedNotSet = 0.0;
 #import "NSManagedObject+InnerBand.h"
 #import <GPX/GPX.h>
 #import "TrackPoint.h"
+#import "WayPointUtilites.h"
 
 @interface PSLocationManager ()
 
@@ -356,12 +357,15 @@ static const CGFloat kSpeedNotSet = 0.0;
                     NSLog(@"****start time");
                 }
                 
-                if (distance>30) {
-                    if (bestLocation) {
+                if (distance>10) {
+                    if (newLocation) {
+                        CLLocationCoordinate2D coordinate=[WayPointUtilites getBaiduFromGoogle:newLocation.coordinate];
                         TrackPoint *trackpoint = [TrackPoint create];
-                        trackpoint.latitude = [NSNumber numberWithFloat:bestLocation.coordinate.latitude];
-                        trackpoint.longitude = [NSNumber numberWithFloat:bestLocation.coordinate.longitude];
-                        trackpoint.altitude = [NSNumber numberWithFloat:bestLocation.altitude];
+                        
+                        trackpoint.latitude = [NSNumber numberWithFloat:coordinate.latitude];
+                        trackpoint.longitude = [NSNumber numberWithFloat:coordinate.longitude];
+                        NSLog(@"--track.la=%@   fact=%f  track.long=%@   fact=%f",trackpoint.latitude,newLocation.coordinate.latitude,trackpoint.longitude,newLocation.coordinate.longitude);
+                        trackpoint.altitude = [NSNumber numberWithFloat:newLocation.altitude];
                         trackpoint.created = [NSDate date];
                         [self.track addTrackpointsObject:trackpoint];
                         

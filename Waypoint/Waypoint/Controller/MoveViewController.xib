@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoveViewController">
             <connections>
                 <outlet property="lbPauseTip" destination="14" id="15"/>
-                <outlet property="mapView" destination="4" id="4fp-8D-HS9"/>
+                <outlet property="mapView" destination="4" id="hHd-xN-5q1"/>
                 <outlet property="setOffItem" destination="21" id="30"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -18,13 +18,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="4" customClass="MKMapView">
+                <view contentMode="scaleToFill" id="4" customClass="BMKMapView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="cxa-ov-xNx"/>
-                    </connections>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="10">
                     <rect key="frame" x="0.0" y="277" width="320" height="159"/>
